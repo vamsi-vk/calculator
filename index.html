@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <link rel="stylesheet" href="cal.css">
+        <title>calculator</title>
+    </head>
+    <body>
+        <center> <h1> Simple Calculator</h1></center><br><Br>
+       <center></cetner> <div class="contianer">
+<div class="screenn"> <input type="text" class="smallscreen"  placeholder="Numbers into Word"><input type="text" class="screen">
+    
+  </div>
+            <div class="keys">
+               
+                <button class="row1" value="1" onclick="myfun('1')">1</button>
+                <button class="row1"  value="2" onclick="myfun('2')">2</button>
+                <button class="row1" value="3" onclick="myfun('3')"> 3</button>
+                <button class="row1"  value="+" onclick="myfun('+')">+</button>
+
+                <button class="row2" value="4" onclick="myfun('4')">4</button>
+                <button class="row2" value="5" onclick="myfun('5')">5</button>
+                <button class="row2" value="6" onclick="myfun('6')">6</button>
+                <button class="row2" value="-" onclick="myfun('-')">-</button>
+
+                <button class="row3" value="7" onclick="myfun('7')">7</button>
+                <button class="row3" value="8" onclick="myfun('8')">8</button>
+                <button class="row3" value="9" onclick="myfun('9')">9</button>
+                <button class="row3" value="*" onclick="myfun('*')">*</button>
+
+                <button class="row4" value="." onclick="myfun('.')">.</button>
+                <button class="row4" value="0" onclick="myfun('0')">0</button>
+                <button class="row4" value="=" onclick="clr()">clear</button>
+                <button class="row4" value="/" onclick="myfun('/')">/</button>
+
+                <button class="clear" value="c" onclick="solve()">Enter</button
+                
+
+            </div>
+        </div></center>
+<script>
+    function myfun(val){
+			var f=document.querySelector(".screen")
+			var rgex=/^[0-9]+$|[0-9]+[+*/-][0-9]+/g
+			var reg=/^[\d]+[/][0]/
+			f.value+=val;
+			if(rgex.test(f.value) & !(reg.test(f.value))){
+					document.querySelector(".screen").style.borderColor="Blue";
+				}
+			else{
+				document.querySelector(".screen").style.borderColor="red"
+				}	
+			}
+
+		function clr(){
+			document.querySelector(".screen").value="";
+			document.querySelector(".screen").style.backgroundColor="white"
+		}
+	
+		function solve(){
+        
+         var  y=eval(document.querySelector(".screen").value)
+
+			document.querySelector(".screen").value=y
+            document.querySelector(".smallscreen").value=toWords(y)
+		}
+var th = ['','thousand','million', 'billion','trillion'];
+var dg = ['zero','one','two','three','four', 'five','six','seven','eight','nine'];
+ var tn = ['ten','eleven','twelve','thirteen', 'fourteen','fifteen','sixteen', 'seventeen','eighteen','nineteen'];
+ var tw = ['twenty','thirty','forty','fifty', 'sixty','seventy','eighty','ninety'];
+ 
+function toWords(s) {
+    s = s.toString();
+    s = s.replace(/[\, ]/g,'');
+    if (s != parseFloat(s)) return 'not a number';
+    var x = s.indexOf('.');
+    if (x == -1)
+        x = s.length;
+    if (x > 15)
+        return 'too big';
+    var n = s.split(''); 
+    var str = '';
+    var sk = 0;
+    for (var i=0;   i < x;  i++) {
+        if ((x-i)%3==2) { 
+            if (n[i] == '1') {
+                str += tn[Number(n[i+1])] + ' ';
+                i++;
+                sk=1;
+            } else if (n[i]!=0) {
+                str += tw[n[i]-2] + ' ';
+                sk=1;
+            }
+        } else if (n[i]!=0) {
+            str += dg[n[i]] +' ';
+            if ((x-i)%3==0) str += 'hundred ';
+            sk=1;
+        }
+        if ((x-i)%3==1) {
+            if (sk)
+                str += th[(x-i-1)/3] + ' ';
+            sk=0;
+        }
+    }
+    
+    if (x != s.length) {
+        var y = s.length;
+        str += 'point ';
+        for (var i=x+1; i<y; i++)
+            str += dg[n[i]] +' ';
+    }
+    return str.replace(/\s+/g,' ');
+}
+</script>
+          
+            
+         </script>
+
+<center><h3>Number of visitors : -<img src="https://hitwebcounter.com/counter/counter.php?page=8015321&style=0001&nbdigits=6&type=page&initCount=0" title="Free Counter" Alt="web counter"   border="0" /> </h3></center>
+    </body>
